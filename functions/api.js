@@ -9,7 +9,7 @@ const port = 5000
 app.use(express.json())
 app.use(cors())
 
-app.post('/contact', (req, res) => {
+app.post('/.netlify/functions/api/contact', (req, res) => {
     const { name, email, message } = req.body;
     try {
         sendMail(name, email, message)
