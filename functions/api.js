@@ -11,10 +11,10 @@ app.use(cors())
 
 app.get('/.netlify/functions/api/contact/all', (req, res) => {
     try {
-        res.status(200).send( { "message" : "Working" } );
+        res.status(200).json( { "message" : "Working" } );
     }
     catch (err) {
-        res.status(500).send('Error');
+        res.status(500).json({'Error':err});
     }
 })
 
@@ -22,10 +22,10 @@ app.post('/.netlify/functions/api/contact', (req, res) => {
     const { name, email, message } = req.body;
     try {
         sendMail(name, email, message)
-        res.status(200).send('Email sent successfully');
+        res.status(200).json({"message":'Email sent successfully'});
     }
     catch (err) {
-        res.status(500).send({'Error sending email'});
+        res.status(500).json({"message":err});
     }
 })
 app.listen(port,()=>{
